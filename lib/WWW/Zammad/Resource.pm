@@ -11,9 +11,10 @@ use namespace::clean;
 
 with 'WWW::Zammad::Role::Log';
 
-has client    => (is => 'ro', required => 1, handles => [qw(transport default_headers)]);
-has resource  => (is => 'ro', required => 1);
-has url  => (is => 'lazy');
+has client =>
+    (is => 'ro', required => 1, handles => [qw(transport default_headers)]);
+has resource => (is => 'ro', required => 1);
+has url      => (is => 'lazy');
 has last_error => (
     is       => 'rwp',
     init_arg => undef,
@@ -43,14 +44,19 @@ sub _maybe_get_json {
 sub get {
     my ($self, $id) = @_;
     $self->_clear_last_error;
-    my $res = $self->transport->get(join('/', $self->url, $id), {expand => 'true'}, $self->default_headers);
+    my $res = $self->transport->get(
+        join('/', $self->url, $id),
+        {expand => 'true'},
+        $self->default_headers
+    );
     $self->_maybe_get_json($res, 200);
 }
 
 sub all {
     my ($self) = @_;
     $self->_clear_last_error;
-    my $res = $self->transport->get($self->url, {expand => 'true'}, $self->default_headers);
+    my $res = $self->transport->get($self->url, {expand => 'true'},
+        $self->default_headers);
     $self->_maybe_get_json($res, 200);
 }
 
@@ -58,7 +64,8 @@ sub search {
     my ($self, $params) = @_;
     $self->_clear_last_error;
     $params->{expand} //= 'true';
-    my $res = $self->transport->get($self->url.'/search', $params, $self->default_headers);
+    my $res = $self->transport->get($self->url . '/search',
+        $params, $self->default_headers);
     $self->_maybe_get_json($res, 200);
 }
 
@@ -66,7 +73,8 @@ sub add {
     my ($self, $attrs) = @_;
     $self->_clear_last_error;
     my $json = encode_json($attrs);
-    my $res = $self->transport->post($self->url, $json, $self->default_headers);
+    my $res
+        = $self->transport->post($self->url, $json, $self->default_headers);
     $self->_maybe_get_json($res, 201);
 }
 
@@ -74,14 +82,16 @@ sub update {
     my ($self, $id, $attrs) = @_;
     $self->_clear_last_error;
     my $json = encode_json($attrs);
-    my $res = $self->transport->put(join('/', $self->url, $id), $json, $self->default_headers);
+    my $res  = $self->transport->put(join('/', $self->url, $id),
+        $json, $self->default_headers);
     $self->_maybe_get_json($res, 200);
 }
 
 sub delete {
     my ($self, $id, $attrs) = @_;
     $self->_clear_last_error;
-    my $res = $self->transport->delete(join('/', $self->url, $id), {}, $self->default_headers);
+    my $res = $self->transport->delete(join('/', $self->url, $id),
+        {}, $self->default_headers);
     $self->_maybe_get_json($res, 200);
 }
 
