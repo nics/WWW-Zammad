@@ -2,6 +2,9 @@ package WWW::Zammad;
 
 use strict;
 use warnings;
+
+our $VERSION = '0.01';
+
 use Class::Load qw(try_load_class);
 use MIME::Base64 qw(encode_base64);
 use Carp;
@@ -122,5 +125,17 @@ __END__
 =head1 NAME
 
 WWW::Zammad - A client for the Zammad API
+
+=head1 AUTHOR
+
+Nicolas Steenlant, C<< <nicolas.steenlant at ugent.be> >>
+
+=head1 LICENSE AND COPYRIGHT
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See http://dev.perl.org/licenses/ for more information.
 
 =cut

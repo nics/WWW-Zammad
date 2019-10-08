@@ -2,6 +2,9 @@ package WWW::Zammad::Role::Log;
 
 use strict;
 use warnings;
+
+our $VERSION = '0.01';
+
 use Log::Any ();
 use Moo::Role;
 use namespace::clean;

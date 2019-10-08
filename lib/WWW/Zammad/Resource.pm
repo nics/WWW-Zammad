@@ -2,6 +2,9 @@ package WWW::Zammad::Resource;
 
 use strict;
 use warnings;
+
+our $VERSION = '0.01';
+
 use Cpanel::JSON::XS qw(encode_json decode_json);
 use Moo;
 use namespace::clean;

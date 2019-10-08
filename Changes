@@ -1,43 +1,5 @@
-Revision history for WWW-ORCID
+Revision history for WWW-Zammad
 
 {{$NEXT}}
-  -make client credentials optional for the public api
-
-0.0402  2019-06-21 14:28:13 CEST
-  - fix typo in pod
-
-0.0401  2017-08-18 17:12:12 CEST
-  - cleanup sandbox example files
-  - fix module versions
-
-0.04  2017-08-18 15:58:45 CEST
-  - document client status
-
-0.03_03  2017-08-11 16:08:43 CEST
-  - record_url helper method
-  - improve generated pod
-
-0.03_02  2017-08-10 09:31:11 CEST
-  - add missing dependency on Log::Any
-
-0.03_01  2017-08-08 11:22:21 CEST
-  - support for the 2.0 API
-  - library API reorganization and cleanup
-  - add missing dependency on HTTP::Tiny
-
-0.02  2015-09-01 14:22:11 CEST
-  - more pod
-  - mote tests
-
-0.0102  2015-04-22 14:00:20 CEST
-  - switch to Dist::Milla
-  - update default sandbox uri
-  - update message version to 1.1
-
-0.0101  2013-05-23
-  - update contributors
-  - this Changes file
-
-0.01    2013-05-23
   - initial release
 

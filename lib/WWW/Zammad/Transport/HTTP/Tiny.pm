@@ -2,6 +2,9 @@ package WWW::Zammad::Transport::HTTP::Tiny;
 
 use strict;
 use warnings;
+
+our $VERSION = '0.01';
+
 use HTTP::Tiny;
 use Moo;
 use namespace::clean;

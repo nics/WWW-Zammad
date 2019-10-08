@@ -2,6 +2,9 @@ package WWW::Zammad::Role::Transport;
 
 use strict;
 use warnings;
+
+our $VERSION = '0.01';
+
 use Moo::Role;
 use namespace::clean;
 
