@@ -1,0 +1,17 @@
+cover_db
+.tidyall.d
+!.gitignore
+.DS_Store
+*.swp
+.build
+_build
+blib
+Build
+LICENSE
+Makefile.PL
+MANIFEST*
+MYMETA.*
+WWW-Zammad-*
+!*.t
+cpanfile.snapshot
+local
