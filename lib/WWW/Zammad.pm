@@ -150,6 +150,21 @@ __END__
 
 WWW::Zammad - A client for the Zammad API
 
+=head1 SYNOPSIS
+
+    my $zammad = WWW::Zammad->new(
+        url      => $zammad_url,
+        username => $zammad_username,
+        password => $zammad_password,
+    );
+
+    my $hits = $zammad->user->search({query => "email:$email"});
+
+    my $ticket = $zammad->ticket->create({...});
+    if (my $err = $zammad->ticket->last_error) {
+        ...
+    }
+
 =head1 OVERVIEW
 
     user                all search get create update delete me
