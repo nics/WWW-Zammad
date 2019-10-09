@@ -19,7 +19,7 @@ sub tags {
     my ($self, $id) = @_;
     $self->_clear_last_error;
     my $res = $self->transport->get(
-        $self->client->url.'/tags',
+        $self->client->url . '/tags',
         {object => 'Ticket', o_id => $id},
         $self->default_headers
     );
@@ -30,7 +30,7 @@ sub add_tag {
     my ($self, $id, $tag) = @_;
     $self->_clear_last_error;
     my $res = $self->transport->get(
-        $self->client->url.'/tags/add',
+        $self->client->url . '/tags/add',
         {object => 'Ticket', o_id => $id, item => $tag},
         $self->default_headers
     );
@@ -41,7 +41,7 @@ sub remove_tag {
     my ($self, $id, $tag) = @_;
     $self->_clear_last_error;
     my $res = $self->transport->get(
-        $self->client->url.'/tags/remove',
+        $self->client->url . '/tags/remove',
         {object => 'Ticket', o_id => $id, item => $tag},
         $self->default_headers
     );
