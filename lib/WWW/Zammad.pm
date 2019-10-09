@@ -8,7 +8,18 @@ our $VERSION = '0.01';
 use Class::Load qw(try_load_class);
 use MIME::Base64 qw(encode_base64);
 use Carp;
-use WWW::Zammad::Resource;
+use WWW::Zammad::Group;
+use WWW::Zammad::Object;
+use WWW::Zammad::OnlineNotification;
+use WWW::Zammad::Organization;
+use WWW::Zammad::Tag;
+use WWW::Zammad::Ticket;
+use WWW::Zammad::TicketArticle;
+use WWW::Zammad::TicketAttachment;
+use WWW::Zammad::TicketPriority;
+use WWW::Zammad::TicketState;
+use WWW::Zammad::User;
+use WWW::Zammad::UserAccessToken;
 use Moo;
 use namespace::clean;
 
@@ -69,69 +80,64 @@ sub BUILD {
     $self->_set_authorization_header;
 }
 
+sub organization {
+    my ($self) = @_;
+    WWW::Zammad::Organization->new(client => $self);
+}
+
 sub group {
     my ($self) = @_;
-    WWW::Zammad::Resource->new(resource => 'groups', client => $self);
+    WWW::Zammad::Group->new(client => $self);
 }
 
 sub object {
     my ($self) = @_;
-    WWW::Zammad::Resource->new(
-        resource => 'object_manager_attributes',
-        client   => $self
-    );
+    WWW::Zammad::Object->new(client => $self);
 }
 
 sub online_notification {
     my ($self) = @_;
-    WWW::Zammad::Resource->new(
-        resource => 'online_notifications',
-        client   => $self
-    );
+    WWW::Zammad::Resource::OnlineNotification->new(client => $self);
 }
 
-sub tag_list {
+sub tag {
     my ($self) = @_;
-    WWW::Zammad::Resource->new(resource => 'tag_list', client => $self);
+    WWW::Zammad::Tag->new(client => $self);
 }
 
 sub ticket {
     my ($self) = @_;
-    WWW::Zammad::Resource->new(resource => 'tickets', client => $self);
+    WWW::Zammad::Ticket->new(client => $self);
 }
 
 sub ticket_article {
     my ($self) = @_;
-    WWW::Zammad::Resource->new(
-        resource => 'ticket_articles',
-        client   => $self
-    );
+    WWW::Zammad::Resource::TicketArticle->new(client => $self);
 }
 
 sub ticket_attachment {
     my ($self) = @_;
-    WWW::Zammad::Resource->new(
-        resource => 'ticket_attachment',
-        client   => $self
-    );
+    WWW::Zammad::Resource::TicketAttachment->new(client => $self);
 }
 
 sub ticket_priority {
     my ($self) = @_;
-    WWW::Zammad::Resource->new(
-        resource => 'ticket_priorities',
-        client   => $self
-    );
+    WWW::Zammad::Resource::TicketPriority->new(client => $self);
 }
 
-sub ticket_states {
+sub ticket_state {
     my ($self) = @_;
-    WWW::Zammad::Resource->new(resource => 'ticket_states', client => $self);
+    WWW::Zammad::TicketState->new(client => $self);
 }
 
-sub users {
+sub user {
     my ($self) = @_;
-    WWW::Zammad::Resource->new(resource => 'users', client => $self);
+    WWW::Zammad::User->new(client => $self);
+}
+
+sub user_access_token {
+    my ($self) = @_;
+    WWW::Zammad::UserAccessToken->new(client => $self);
 }
 
 1;
@@ -143,6 +149,23 @@ __END__
 =head1 NAME
 
 WWW::Zammad - A client for the Zammad API
+
+=head1 OVERVIEW
+
+    user                all search get create update delete me
+    organization        all search get create update delete
+    group               all        get create update delete
+    object              all        get create update        migrate
+    online_notification all        get        update delete mark_as_read
+    tag                 all search     create update delete
+    ticket              all search get create update delete
+    ticket_article                 get create               by_ticket
+    ticket_attachment                                       download
+    ticket_priority     all        get create update delete
+    ticket_state        all        get create update delete
+    user_access_token   all            create        delete
+
+TODO: tags api
 
 =head1 AUTHOR
 
@@ -157,3 +180,4 @@ by the Free Software Foundation; or the Artistic License.
 See http://dev.perl.org/licenses/ for more information.
 
 =cut
+
