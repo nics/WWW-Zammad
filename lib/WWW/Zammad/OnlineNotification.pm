@@ -10,9 +10,11 @@ use namespace::clean;
 
 sub resource_path {'online_notifications'}
 
-with 'WWW::Zammad::Role::Resource', 'WWW::Zammad::Role::All',
-    'WWW::Zammad::Role::Get', 'WWW::Zammad::Role::Update',
-    'WWW::Zammad::Role::Delete';
+with 'WWW::Zammad::Role::Resource';
+with 'WWW::Zammad::Role::List';
+with 'WWW::Zammad::Role::Get';
+with 'WWW::Zammad::Role::Update';
+with 'WWW::Zammad::Role::Delete';
 
 sub mark_as_read {
     my ($self) = @_;

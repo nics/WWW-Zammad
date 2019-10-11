@@ -10,9 +10,12 @@ use namespace::clean;
 
 sub resource_path {'ticket_states'}
 
-with 'WWW::Zammad::Role::Resource', 'WWW::Zammad::Role::All',
-    'WWW::Zammad::Role::Get',    'WWW::Zammad::Role::Create',
-    'WWW::Zammad::Role::Update', 'WWW::Zammad::Role::Delete';
+with 'WWW::Zammad::Role::Resource';
+with 'WWW::Zammad::Role::List';
+with 'WWW::Zammad::Role::Get';
+with 'WWW::Zammad::Role::Create';
+with 'WWW::Zammad::Role::Update';
+with 'WWW::Zammad::Role::Delete';
 
 1;
 

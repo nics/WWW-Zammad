@@ -10,8 +10,9 @@ use namespace::clean;
 
 sub resource_path {'ticket_articles'}
 
-with 'WWW::Zammad::Role::Resource', 'WWW::Zammad::Role::Get',
-    'WWW::Zammad::Role::Create';
+with 'WWW::Zammad::Role::Resource';
+with 'WWW::Zammad::Role::Get';
+with 'WWW::Zammad::Role::Create';
 
 sub by_ticket {
     my ($self, $ticket_id) = @_;

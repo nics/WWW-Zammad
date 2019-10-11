@@ -158,7 +158,11 @@ WWW::Zammad - A client for the Zammad API
         password => $zammad_password,
     );
 
-    my $hits = $zammad->user->search({query => "email:$email"});
+    my $items = $zammad->user->search({query => "email:$email", per_page => 10});
+
+    $zammad->user->list(sub {
+        my $user = shift;
+    });
 
     my $ticket = $zammad->ticket->create({...});
     if (my $err = $zammad->ticket->last_error) {
@@ -167,18 +171,18 @@ WWW::Zammad - A client for the Zammad API
 
 =head1 OVERVIEW
 
-    user                all search get create update delete me
-    organization        all search get create update delete
-    group               all        get create update delete
-    object              all        get create update        migrate
-    online_notification all        get        update delete mark_as_read
-    tag                 all search     create update delete
-    ticket              all search get create update delete tags,add_tag,remove_tag
-    ticket_article                 get create               by_ticket
-    ticket_attachment                                       download
-    ticket_priority     all        get create update delete
-    ticket_state        all        get create update delete
-    user_access_token   all            create        delete
+    user                list search get create update delete me
+    organization        list search get create update delete
+    group               list        get create update delete
+    object              list        get create update        migrate
+    online_notification list        get        update delete mark_as_read
+    tag                 list search     create update delete
+    ticket              list search get create update delete tags,add_tag,remove_tag
+    ticket_article                  get create               by_ticket
+    ticket_attachment                                        download
+    ticket_priority     list        get create update delete
+    ticket_state        list        get create update delete
+    user_access_token   list            create        delete
 
 =head1 AUTHOR
 

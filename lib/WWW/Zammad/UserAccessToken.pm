@@ -10,7 +10,9 @@ use namespace::clean;
 
 sub resource_path {'user_access_token'}
 
-with 'WWW::Zammad::Role::Resource', 'WWW::Zammad::Role::All',
-    'WWW::Zammad::Role::Create', 'WWW::Zammad::Role::Delete';
+with 'WWW::Zammad::Role::Resource';
+with 'WWW::Zammad::Role::List';
+with 'WWW::Zammad::Role::Create';
+with 'WWW::Zammad::Role::Delete';
 
 1;

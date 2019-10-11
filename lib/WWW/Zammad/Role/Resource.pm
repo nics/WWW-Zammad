@@ -47,6 +47,37 @@ sub _maybe_get_json {
     return;
 }
 
+sub _iterate {
+    my $self   = shift;
+    my $url    = shift;
+    my $params = ref($_[0]) && ref($_[0]) eq 'HASH' ? shift : {};
+    my $cb     = shift;
+
+    $params->{expand} //= 'true';
+    $params->{page} //= 1;
+    $params->{per_page} //= 10;
+
+    if ($cb) {
+        my $n = 0;
+        my $p = {%$params};
+        while (1) {
+            my $res = $self->transport->get($url,
+                $params, $self->default_headers);
+            my $items = $self->_maybe_get_json($res, 200) // last;
+            @$items // last;
+            for (@$items) {
+                $cb->($_, $n++);
+            }
+            $p->{page}++;
+        }
+        return $n;
+    }
+
+    my $res = $self->transport->get($url,
+        $params, $self->default_headers);
+    $self->_maybe_get_json($res, 200);
+}
+
 sub on_behalf_of {
     my ($self, $on_behalf_of, $cb) = @_;
     my $prev = $self->default_headers->{'X-On-Behalf-Of'};

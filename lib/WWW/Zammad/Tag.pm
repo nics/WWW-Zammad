@@ -10,9 +10,11 @@ use namespace::clean;
 
 sub resource_path {'tag_list'}
 
-with 'WWW::Zammad::Role::Resource', 'WWW::Zammad::Role::All',
-    'WWW::Zammad::Role::Create', 'WWW::Zammad::Role::Update',
-    'WWW::Zammad::Role::Delete';
+with 'WWW::Zammad::Role::Resource';
+with 'WWW::Zammad::Role::List';
+with 'WWW::Zammad::Role::Create';
+with 'WWW::Zammad::Role::Update';
+with 'WWW::Zammad::Role::Delete';
 
 sub search {
     my ($self, $params) = @_;
