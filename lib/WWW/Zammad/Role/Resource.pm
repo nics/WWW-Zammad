@@ -53,28 +53,23 @@ sub _iterate {
     my $params = ref($_[0]) && ref($_[0]) eq 'HASH' ? shift : {};
     my $cb     = shift;
 
-    $params->{expand} //= 'true';
-    $params->{page} //= 1;
-    $params->{per_page} //= 10;
+    my $p = {expand => 'true', page => 1, per_page => 10, %$params};
 
     if ($cb) {
         my $n = 0;
-        my $p = {%$params};
         while (1) {
             my $res = $self->transport->get($url,
-                $params, $self->default_headers);
+                $p, $self->default_headers);
             my $items = $self->_maybe_get_json($res, 200) // last;
             @$items // last;
-            for (@$items) {
-                $cb->($_, $n++);
-            }
+            $cb->($_, $n++) for @$items;
             $p->{page}++;
         }
         return $n;
     }
 
     my $res = $self->transport->get($url,
-        $params, $self->default_headers);
+        $p, $self->default_headers);
     $self->_maybe_get_json($res, 200);
 }
 
